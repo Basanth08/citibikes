@@ -8,8 +8,12 @@ class Producer:
         self.producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                                       value_serializer=lambda x: json.dumps(x).encode('utf-8'))
         
-    def send_message(self, topic, message):
+    def data_producer(self, topic, message):
         self.producer.send(topic, message)
+        self.producer.flush()  # Ensure message is sent immediately
+        
+    def close(self):
+        self.producer.close()
         
         
 
