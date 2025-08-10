@@ -23,6 +23,32 @@ Every minute, I'm collecting real-time information about:
 
 ---
 
+## 🔒 **Security & Privacy Notice**
+
+**🛡️ AWS Credentials & Security:**
+- **No AWS credentials, access keys, or secret keys are exposed** in this repository
+- **All sensitive AWS information has been removed** and replaced with placeholder values
+- **Your actual AWS account details are completely safe** - only generic templates are shown
+- **Environment variables** are used for secure configuration management
+- **IAM roles** are configured with minimal required permissions
+- **S3 bucket policies** follow security best practices
+
+**🔐 What I Secured:**
+- ✅ AWS Account ID: Hidden (using `YOUR_ACCOUNT_ID` placeholder)
+- ✅ S3 Bucket Names: Generic (using `your-unique-bucket-name` placeholder)  
+- ✅ IAM Role ARNs: Template format (using placeholders)
+- ✅ No access keys, secret keys, or passwords anywhere in the code
+
+**📋 For Your Safety:**
+When you clone this repository, you'll need to:
+1. Create your own AWS resources using the provided scripts
+2. Update the placeholder values in `config/aws_config.env`
+3. Never commit your actual AWS credentials to version control
+
+**This project demonstrates enterprise-grade security practices while keeping your AWS environment completely private.**
+
+---
+
 ## Quick Start (Get Running in 5 Minutes!)
 
 ### What You Need
@@ -931,7 +957,7 @@ chmod +x scripts/aws/setup_aws.sh
 ./scripts/aws/setup_aws.sh
 
 # I set up the Glue data catalog
-export GLUE_ROLE_ARN=arn:aws:iam::905418241375:role/GlueServiceRole-Citibikes
+export GLUE_ROLE_ARN=arn:aws:iam::YOUR_ACCOUNT_ID:role/GlueServiceRole-Citibikes
 python src/aws/setup_glue.py
 
 # I verified the setup
@@ -941,7 +967,7 @@ python src/aws/list_tables.py
 
 **What I Successfully Created:**
 ```
-✅ S3 Bucket Created: citibikes-logs-2024
+✅ S3 Bucket Created: your-unique-bucket-name
 ✅ IAM Role Created: GlueServiceRole-Citibikes
 ✅ Glue Database Created: citibikes_analytics
 ✅ Glue Tables Created: logs_manual, logs_crawler
@@ -1092,7 +1118,7 @@ aws sts get-caller-identity
 echo $GLUE_ROLE_ARN
 
 # I re-ran setup with proper environment
-export GLUE_ROLE_ARN=arn:aws:iam::905418241375:role/GlueServiceRole-Citibikes
+export GLUE_ROLE_ARN=arn:aws:iam::YOUR_ACCOUNT_ID:role/GlueServiceRole-Citibikes
 python src/aws/setup_glue.py
 ```
 
@@ -1203,7 +1229,7 @@ aws sts get-caller-identity
 echo $GLUE_ROLE_ARN
 
 # Re-run with proper environment
-export GLUE_ROLE_ARN=arn:aws:iam::905418241375:role/GlueServiceRole-Citibikes
+export GLUE_ROLE_ARN=arn:aws:iam::YOUR_ACCOUNT_ID:role/GlueServiceRole-Citibikes
 python src/aws/setup_glue.py
 ```
 
