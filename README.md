@@ -599,16 +599,33 @@ python main.py --mode continuous --interval 120
 
 ```
 citibikes/
-├── constants/          # Configuration settings
-├── services/           # HTTP client for API calls
-├── bikes_module/       # Main business logic
-├── kafka_producer/     # Sends data to Kafka
-├── kafka_consumer/     # Reads data from Kafka
-├── images/             # Diagrams and screenshots
-├── docker-compose.yaml # Infrastructure setup
-├── main.py             # Main program
-├── test_pipeline.py    # Tests
-└── README.md           # This file!
+├── src/                    # Source code directory
+│   ├── core/              # Core application logic
+│   │   ├── bikes_module/  # Main business logic for bike data
+│   │   ├── main.py        # Main producer program
+│   │   ├── consume.py     # Consumer program
+│   │   └── config.py      # Configuration settings
+│   ├── streaming/         # Kafka streaming components
+│   │   ├── kafka_producer/    # Sends data to Kafka
+│   │   └── kafka_consumer/    # Reads data from Kafka
+│   ├── utils/             # Utility modules
+│   │   ├── services/      # HTTP client for API calls
+│   │   └── constants/     # Configuration constants (routes, topics)
+│   └── aws/               # AWS integration scripts
+├── config/                 # Configuration files
+│   ├── docker-compose.yaml # Infrastructure setup
+│   ├── requirements.txt    # Python dependencies
+│   └── aws_config.env     # AWS configuration
+├── scripts/                # Automation scripts
+│   ├── aws/               # AWS setup scripts
+│   ├── monitoring/        # Health check scripts
+│   └── setup/             # Installation scripts
+├── tests/                  # Test files
+├── docs/                   # Documentation and images
+├── logs/                   # Application logs
+├── run_pipeline.py         # Main runner script (producer)
+├── run_consumer.py         # Consumer runner script
+└── README.md               # This file!
 ```
 
 ---
