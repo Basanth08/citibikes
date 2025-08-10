@@ -44,30 +44,30 @@ def setup_logging(log_level: str = "INFO") -> logging.Logger:
 def run_single_execution(bikes: Bikes, logger: logging.Logger) -> bool:
     """Run a single execution of the data pipeline"""
     try:
-        logger.info("🚴 Starting Citi Bikes Real-Time Streaming Pipeline")
+        logger.info("Starting Citi Bikes Real-Time Streaming Pipeline")
         
         # Fetch and stream station information
-        logger.info("📡 Fetching station information...")
+        logger.info("Fetching station information...")
         station_info = bikes.get_bikes_station_information(BIKES_STATION_INFORMATION)
-        logger.info(f"✅ Station information processed: {len(station_info)} records")
+        logger.info(f"Station information processed: {len(station_info)} records")
         
         # Fetch and stream station status
-        logger.info("📡 Fetching station status...")
+        logger.info("Fetching station status...")
         station_status = bikes.get_bikes_station_status(BIKES_STATION_STATUS)
-        logger.info(f"✅ Station status processed: {len(station_status)} records")
+        logger.info(f"Station status processed: {len(station_status)} records")
         
         total_records = len(station_info) + len(station_status)
-        logger.info(f"🎉 Data pipeline execution completed successfully! Total records: {total_records}")
+        logger.info(f"Data pipeline execution completed successfully! Total records: {total_records}")
         
         return True
         
     except Exception as e:
-        logger.error(f"❌ Error in main pipeline: {e}")
+        logger.error(f"Error in main pipeline: {e}")
         return False
 
 def run_continuous_streaming(bikes: Bikes, logger: logging.Logger, interval: int = 60) -> None:
     """Run continuous streaming with specified interval"""
-    logger.info(f"🔄 Starting continuous streaming with {interval} second intervals")
+    logger.info(f"Starting continuous streaming with {interval} second intervals")
     logger.info("Press Ctrl+C to stop streaming")
     
     execution_count = 0
@@ -76,27 +76,27 @@ def run_continuous_streaming(bikes: Bikes, logger: logging.Logger, interval: int
     try:
         while running:
             execution_count += 1
-            logger.info(f"🔄 Execution #{execution_count} starting at {time.strftime('%Y-%m-%d %H:%M:%S')}")
+            logger.info(f"Execution #{execution_count} starting at {time.strftime('%Y-%m-%d %H:%M:%S')}")
             
             success = run_single_execution(bikes, logger)
             
             if success:
-                logger.info(f"✅ Execution #{execution_count} completed successfully")
+                logger.info(f"Execution #{execution_count} completed successfully")
             else:
-                logger.error(f"❌ Execution #{execution_count} failed")
+                logger.error(f"Execution #{execution_count} failed")
             
             # Calculate next execution time
             elapsed = time.time() - start_time
             next_execution = interval - (elapsed % interval)
             
             if running:  # Check again in case signal was received
-                logger.info(f"⏰ Next execution in {next_execution:.1f} seconds...")
+                logger.info(f"Next execution in {next_execution:.1f} seconds...")
                 time.sleep(next_execution)
             
     except KeyboardInterrupt:
-        logger.info("⏹️ Continuous streaming interrupted by user")
+        logger.info("Continuous streaming interrupted by user")
     except Exception as e:
-        logger.error(f"❌ Unexpected error in continuous streaming: {e}")
+        logger.error(f"Unexpected error in continuous streaming: {e}")
         raise
 
 def main():
@@ -134,7 +134,7 @@ def main():
     try:
         # Initialize the bikes orchestrator
         bikes = Bikes()
-        logger.info("✅ Bikes orchestrator initialized successfully")
+        logger.info("Bikes orchestrator initialized successfully")
         
         if args.mode == "single":
             # Single execution mode
@@ -146,15 +146,15 @@ def main():
             return 0
             
     except Exception as e:
-        logger.error(f"❌ Fatal error in main pipeline: {e}")
+        logger.error(f"Fatal error in main pipeline: {e}")
         return 1
     finally:
         # Cleanup
         if bikes:
             bikes.close()
-            logger.info("🔒 Bikes orchestrator resources cleaned up")
+            logger.info("Bikes orchestrator resources cleaned up")
         
-        logger.info("👋 Pipeline shutdown complete")
+        logger.info("Pipeline shutdown complete")
 
 if __name__ == "__main__":
     exit_code = main()

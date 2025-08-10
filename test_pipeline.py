@@ -196,7 +196,7 @@ class TestIntegration(unittest.TestCase):
 
 def run_performance_test():
     """Run performance test for the pipeline"""
-    logger.info("🚀 Starting Performance Test")
+    logger.info("Starting Performance Test")
     
     start_time = time.time()
     
@@ -210,7 +210,7 @@ def run_performance_test():
             producer.data_producer("test-topic", message)
         producer_time = time.time() - producer_start
         
-        logger.info(f"✅ Producer performance: {len(test_messages)} messages in {producer_time:.2f}s")
+        logger.info(f"Producer performance: {len(test_messages)} messages in {producer_time:.2f}s")
         logger.info(f"   Rate: {len(test_messages)/producer_time:.1f} messages/second")
         
         # Test HTTP service performance
@@ -225,14 +225,14 @@ def run_performance_test():
                 logger.warning(f"HTTP request {i+1} failed: {e}")
         http_time = time.time() - http_start
         
-        logger.info(f"✅ HTTP service performance: 10 requests in {http_time:.2f}s")
+        logger.info(f"HTTP service performance: 10 requests in {http_time:.2f}s")
         logger.info(f"   Rate: {10/http_time:.1f} requests/second")
         
         total_time = time.time() - start_time
-        logger.info(f"🎉 Performance test completed in {total_time:.2f}s")
+        logger.info(f"Performance test completed in {total_time:.2f}s")
         
     except Exception as e:
-        logger.error(f"❌ Performance test failed: {e}")
+        logger.error(f"Performance test failed: {e}")
         raise
     finally:
         if 'producer' in locals():
@@ -242,17 +242,17 @@ def run_performance_test():
 
 def main():
     """Run all tests"""
-    logger.info("🧪 Starting Citi Bikes Pipeline Tests")
+    logger.info("Starting Citi Bikes Pipeline Tests")
     
     # Run unit tests
-    logger.info("📋 Running Unit Tests...")
+    logger.info("Running Unit Tests...")
     unittest.main(argv=[''], exit=False, verbosity=2)
     
     # Run performance tests
-    logger.info("📊 Running Performance Tests...")
+    logger.info("Running Performance Tests...")
     run_performance_test()
     
-    logger.info("🎉 All tests completed!")
+    logger.info("All tests completed!")
 
 if __name__ == "__main__":
     main() 

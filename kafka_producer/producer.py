@@ -26,8 +26,8 @@ class Producer:
                 key_serializer=lambda x: x.encode('utf-8') if x else None,
                 acks='all',  # Wait for all replicas to acknowledge
                 retries=3,   # Retry failed sends
-                max_in_flight_requests_per_connection=1,
-                enable_idempotence=True  # Prevent duplicate messages
+                max_in_flight_requests_per_connection=1
+                # Note: enable_idempotence removed for compatibility
             )
             self.logger.info(f"Producer initialized successfully with bootstrap servers: {self.bootstrap_servers}")
         except Exception as e:
